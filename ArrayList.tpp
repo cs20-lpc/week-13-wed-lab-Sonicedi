@@ -1,16 +1,73 @@
 template <typename T>
 void ArrayList<T>::bubbleSort() {
     // TODO
+     int n = this->length;
+
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - 1 - i; j++) {
+
+            // key comparison
+            numComps++;
+
+            if (buffer[j] > buffer[j + 1]) {
+                swap(j, j + 1);
+                numSwaps++;
+            }
+        }
+    }
 }
 
 template <typename T>
 void ArrayList<T>::insertionSort() {
     // TODO
+     int n = this->length;
+
+    // Exchange-based insertion sort using swaps
+    for (int i = 1; i < n; i++) {
+        int j = i;
+
+        // Move buffer[j] leftwards until it's in the right spot
+        while (j > 0) {
+            // Count the key comparison between buffer[j] and buffer[j-1]
+            numComps++;
+
+            if (buffer[j] < buffer[j - 1]) {
+                // If out of order, swap them
+                swap(j, j - 1);
+                numSwaps++;
+                j--;
+            }
+            else {
+                // In correct position, stop for this i
+                break;
+            }
+        }
+    }
 }
 
 template <typename T>
 void ArrayList<T>::selectionSort() {
     // TODO
+     int n = this->length;
+
+    // Standard selection sort (ascending)
+    for (int i = 0; i < n - 1; i++) {
+        int minIndex = i;
+
+        // Find index of smallest element in the unsorted suffix
+        for (int j = i + 1; j < n; j++) {
+            numComps++;
+            if (buffer[j] < buffer[minIndex]) {
+                minIndex = j;
+            }
+        }
+
+        // Swap the found minimum with the first unsorted element
+        if (minIndex != i) {
+            swap(i, minIndex);
+            numSwaps++;
+        }
+    }
 }
 
 /*******************************************************************************
